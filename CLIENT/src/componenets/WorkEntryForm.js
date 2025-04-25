@@ -31,7 +31,7 @@ const WorkEntryForm = ({ onSuccess }) => {
     setError("")
 
     try {
-      const res = await axios.post("http://localhost:5000/api/work-entries", formData, {
+      const res = await axios.post("https://earn-and-learn-backend.onrender.com/api/work-entries", formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
 

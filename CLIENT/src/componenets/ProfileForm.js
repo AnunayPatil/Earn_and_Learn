@@ -94,7 +94,7 @@ const ProfileForm = ({ user, onProfileUpdate }) => {
         dateOfBirth: profileData.dateOfBirth ? format(profileData.dateOfBirth, "yyyy-MM-dd") : null,
       }
 
-      const response = await axios.patch("http://localhost:5000/api/profile/me", formattedData, {
+      const response = await axios.patch("https://earn-and-learn-backend.onrender.com/api/profile/me", formattedData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
 
@@ -118,7 +118,7 @@ const ProfileForm = ({ user, onProfileUpdate }) => {
 
     setImageLoading(true)
     try {
-      const response = await axios.post("http://localhost:5000/api/profile/me/image", formData, {
+      const response = await axios.post("https://earn-and-learn-backend.onrender.com/api/profile/me/image", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -143,7 +143,7 @@ const ProfileForm = ({ user, onProfileUpdate }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/profile/me/submit",
+        "https://earn-and-learn-backend.onrender.com/api/profile/me/submit",
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

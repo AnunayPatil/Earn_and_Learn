@@ -65,7 +65,7 @@ const StudentDashboard = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "http://localhost:5000/api/work-entries/my-entries",
+        "https://earn-and-learn-backend.onrender.com/api/work-entries/my-entries",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -109,7 +109,7 @@ const StudentDashboard = () => {
   const fetchProfile = async () => {
     try {
       setProfileLoading(true);
-      const res = await axios.get("http://localhost:5000/api/profile/me", {
+      const res = await axios.get("https://earn-and-learn-backend.onrender.com/api/profile/me", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setProfileData(res.data);
@@ -210,7 +210,7 @@ const StudentDashboard = () => {
               <StatisticsCard
                 title="Total Earnings"
                 value={`₹${stats.totalEarnings.toFixed(0)}`}
-                subtitle="At ₹50 per hour"
+                subtitle="At ₹60 per hour"
                 icon={<AttachMoney />}
                 color={theme.palette.success.main}
               />

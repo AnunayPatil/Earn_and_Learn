@@ -38,7 +38,7 @@ const MonthlyReportView = ({ studentId, isAdmin = false }) => {
   useEffect(() => {
     const fetchAvailableMonths = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/reports/available-months/${studentId}`, {
+        const res = await axios.get(`https://earn-and-learn-backend.onrender.com/api/reports/available-months/${studentId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         setAvailableMonths(res.data)
@@ -74,7 +74,7 @@ const MonthlyReportView = ({ studentId, isAdmin = false }) => {
   const fetchReportData = async (year, month) => {
     try {
       setLoading(true)
-      const res = await axios.get(`http://localhost:5000/api/reports/monthly/${studentId}/${year}/${month}`, {
+      const res = await axios.get(`https://earn-and-learn-backend.onrender.com/api/reports/monthly/${studentId}/${year}/${month}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       setReportData(res.data)

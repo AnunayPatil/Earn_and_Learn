@@ -59,7 +59,7 @@ const DashboardLayout = ({ children, title, currentTab, onLogout }) => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
+        const response = await axios.get("https://earn-and-learn-backend.onrender.com/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         setUserData(response.data)

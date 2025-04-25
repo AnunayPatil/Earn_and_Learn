@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/me", {
+        const res = await axios.get("https://earn-and-learn-backend.onrender.com/api/auth/me", {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         setUser(res.data)
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
+    const res = await axios.post("https://earn-and-learn-backend.onrender.com/api/auth/login", {
       email,
       password,
     })
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const register = async (email, password, role) => {
-    const res = await axios.post("http://localhost:5000/api/auth/register", {
+    const res = await axios.post("https://earn-and-learn-backend.onrender.com/api/auth/register", {
       email,
       password,
       role,

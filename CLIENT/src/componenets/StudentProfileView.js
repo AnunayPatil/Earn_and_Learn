@@ -15,7 +15,7 @@ const StudentProfileView = ({ student, onProfileUpdate, token }) => {
 
       setLoading(true)
       try {
-        const response = await axios.get(`http://localhost:5000/api/profile/students/${student._id}`, {
+        const response = await axios.get(`https://earn-and-learn-backend.onrender.com/api/profile/students/${student._id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         setProfile(response.data)
@@ -39,7 +39,7 @@ const StudentProfileView = ({ student, onProfileUpdate, token }) => {
     setLoading(true)
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/profile/students/${profile._id}/status`,
+        `https://earn-and-learn-backend.onrender.com/api/profile/students/${profile._id}/status`,
         { status: "approved" },
         { headers: { Authorization: `Bearer ${token}` } },
       )
@@ -60,7 +60,7 @@ const StudentProfileView = ({ student, onProfileUpdate, token }) => {
     setLoading(true)
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/profile/students/${profile._id}/status`,
+        `https://earn-and-learn-backend.onrender.com/api/profile/students/${profile._id}/status`,
         {
           status: "rejected",
           feedback: "Please update your information and try again.", // You could add a feedback form

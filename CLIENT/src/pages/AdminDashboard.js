@@ -75,7 +75,7 @@ const AdminDashboard = () => {
   const fetchStudentsWithEntries = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/auth/students", {
+      const res = await axios.get("https://earn-and-learn-backend.onrender.com/api/auth/students", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStudents(res.data);
@@ -90,7 +90,7 @@ const AdminDashboard = () => {
     try {
       setProfilesLoading(true);
       const res = await axios.get(
-        "http://localhost:5000/api/profile/students?status=pending",
+        "https://earn-and-learn-backend.onrender.com/api/profile/students?status=pending",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
 
   const fetchAdmins = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/admins", {
+      const res = await axios.get("https://earn-and-learn-backend.onrender.com/api/auth/admins", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmins(res.data);
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
   const handleStatusChange = async (entryId, newStatus) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/api/work-entries/${entryId}/status`,
+        `https://earn-and-learn-backend.onrender.com/api/work-entries/${entryId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -213,7 +213,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/create-admin",
+        "https://earn-and-learn-backend.onrender.com/api/auth/create-admin",
         {
           email: newAdminData.email,
           password: newAdminData.password,
