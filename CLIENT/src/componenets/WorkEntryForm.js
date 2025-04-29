@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Box, Button, TextField, Grid, Paper, Typography } from "@mui/material"
-import axios from "axios"
+import { useState } from "react";
+import { Box, Button, TextField, Grid, Paper, Typography } from "@mui/material";
+import axios from "axios";
 
 const WorkEntryForm = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -16,27 +16,31 @@ const WorkEntryForm = ({ onSuccess }) => {
     collegeName: "",
     prnNumber: "",
     aadharNumber: "",
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const res = await axios.post("https://earn-and-learn-backend.onrender.com/api/work-entries", formData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+      const res = await axios.post(
+        "https://earn-and-learn-backend.onrender.com/api/work-entries",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
 
       if (onSuccess) {
-        onSuccess(res.data)
+        onSuccess(res.data);
       }
 
       // Reset form
@@ -51,13 +55,13 @@ const WorkEntryForm = ({ onSuccess }) => {
         collegeName: "",
         prnNumber: "",
         aadharNumber: "",
-      })
+      });
     } catch (err) {
-      setError(err.response?.data?.error || "Failed to submit work entry")
+      setError(err.response?.data?.error || "Failed to submit work entry");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
@@ -168,7 +172,15 @@ const WorkEntryForm = ({ onSuccess }) => {
               label="In Time"
               name="inTime"
               value={formData.inTime}
-              onChange={handleChange}
+              onChange={(event) => {
+                const selectedDate = new Date(event.target.value);
+                const day = selectedDate.getDay();
+                if (day === 0 || day === 6) {
+                  alert("Please select a weekday (Monday to Friday).");
+                } else {
+                  handleChange(event);
+                }
+              }}
               required
               margin="normal"
               InputLabelProps={{ shrink: true }}
@@ -181,7 +193,15 @@ const WorkEntryForm = ({ onSuccess }) => {
               label="Out Time"
               name="outTime"
               value={formData.outTime}
-              onChange={handleChange}
+              onChange={(event) => {
+                const selectedDate = new Date(event.target.value);
+                const day = selectedDate.getDay();
+                if (day === 0 || day === 6) {
+                  alert("Please select a weekday (Monday to Friday).");
+                } else {
+                  handleChange(event);
+                }
+              }}
               required
               margin="normal"
               InputLabelProps={{ shrink: true }}
@@ -189,12 +209,17 @@ const WorkEntryForm = ({ onSuccess }) => {
           </Grid>
         </Grid>
 
-        <Button type="submit" variant="contained" disabled={loading} sx={{ mt: 3 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          sx={{ mt: 3 }}
+        >
           {loading ? "Submitting..." : "Submit Work Entry"}
         </Button>
       </Box>
     </Paper>
-  )
-}
+  );
+};
 
-export default WorkEntryForm
+export default WorkEntryForm;

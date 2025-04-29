@@ -1,6 +1,5 @@
 // StudentReportPDF.js
 "use client";
-
 import {
   Document,
   Page,
@@ -9,7 +8,6 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-
 // Register custom fonts
 Font.register({
   family: "Montserrat",
@@ -28,7 +26,6 @@ Font.register({
     },
   ],
 });
-
 Font.register({
   family: "Open Sans",
   fonts: [
@@ -42,7 +39,6 @@ Font.register({
     },
   ],
 });
-
 // Create styles with improved typography and colors
 const styles = StyleSheet.create({
   page: {
@@ -65,30 +61,18 @@ const styles = StyleSheet.create({
   headerContent: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 40,
+    marginBottom: 30, // Reduced margin
     marginTop: 20,
   },
   headerLeft: {
     width: "60%",
   },
   headerRight: {
-    width: "30%",
+    width: "35%", // Adjusted width
     backgroundColor: "#e3f2fd", // Light blue background
     borderRadius: 4,
     padding: 10,
     borderLeft: "4px solid #007bff",
-  },
-  reportIdBadge: {
-    position: "absolute",
-    top: 70,
-    right: 30,
-    backgroundColor: "#007bff",
-    color: "white",
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-    fontSize: 9,
-    fontWeight: "bold",
   },
   title: {
     fontFamily: "Montserrat",
@@ -102,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 600,
     color: "#64b5f6", // Lighter blue
-    marginBottom: 5,
+    marginBottom: 8, // Increased margin
   },
   reportPeriod: {
     fontSize: 12,
@@ -113,13 +97,13 @@ const styles = StyleSheet.create({
   detailLabel: {
     fontSize: 9,
     color: "#666666",
-    marginBottom: 3,
+    marginBottom: 2,
   },
   detailValue: {
     fontSize: 10,
     fontWeight: 600,
     color: "#007bff",
-    marginBottom: 7,
+    marginBottom: 5, // Reduced margin
   },
   sectionContainer: {
     marginTop: 15,
@@ -224,27 +208,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
   },
-  statusText: {
-    borderRadius: 12,
-    paddingVertical: 3,
-    paddingHorizontal: 8,
-    fontSize: 8,
-    fontWeight: 600,
-    textAlign: "center",
-    display: "inline-block",
-  },
-  statusApproved: {
-    color: "#2e7d32",
-    backgroundColor: "#e8f5e9",
-  },
-  statusPending: {
-    color: "#f57c00",
-    backgroundColor: "#fff3e0",
-  },
-  statusRejected: {
-    color: "#d32f2f",
-    backgroundColor: "#ffebee",
-  },
   signatureSection: {
     marginTop: 40,
     borderTop: "1px solid #90caf9",
@@ -293,8 +256,29 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: "#666666",
   },
+  signatureColumn: {
+    width: "10%", // Adjusted width
+    padding: 6,
+    fontSize: 9,
+    textAlign: "center",
+    justifyContent: "center",
+    borderLeft: "1px solid #90caf9", // Add a border to separate the columns visually
+  },
+  signaturePlaceholder: {
+    height: 20,
+    width: "80%",
+    borderBottom: "1px solid #ccc",
+    marginHorizontal: "10%",
+  },
+  facultyNameColumn: {
+    width: "15%",
+    padding: 6,
+    fontSize: 9,
+    textAlign: "center",
+    justifyContent: "center",
+    borderLeft: "1px solid #90caf9", // Add a border to separate the columns visually
+  },
 });
-
 // Helper functions (same as ReportPDF)
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString("en-IN", {
@@ -303,7 +287,6 @@ const formatDate = (dateString) => {
     year: "numeric",
   });
 };
-
 const formatTime = (dateString) => {
   return new Date(dateString).toLocaleTimeString("en-IN", {
     hour: "2-digit",
@@ -311,58 +294,29 @@ const formatTime = (dateString) => {
     hour12: true,
   });
 };
-
 const getMonthName = (month) => {
   return new Date(2000, month - 1, 1).toLocaleString("en-IN", {
     month: "long",
   });
 };
-
-// Get status style based on entry status (same as ReportPDF)
-const getStatusStyle = (status) => {
-  switch (status.toLowerCase()) {
-    case "approved":
-      return styles.statusApproved;
-    case "pending":
-      return styles.statusPending;
-    case "rejected":
-      return styles.statusRejected;
-    default:
-      return {};
-  }
-};
-
 // PDF Document Component for Student
 const StudentReportPDF = ({ workEntries }) => {
-  // Generate a report ID
-  // Generate a report ID
-  const currentYear = new Date().getFullYear();
-  const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
-  const randomPart = Math.random().toString(36).substring(7).toUpperCase();
-  const reportId = `STUDENT-REP-${currentYear}${currentMonth}-${randomPart}`;
-
   // Calculate total hours and earnings, with safety checks
   const totalHours = Array.isArray(workEntries)
     ? workEntries
-        .reduce((sum, entry) => sum + (entry?.totalHours || 0), 0)
-        .toFixed(2)
+      .reduce((sum, entry) => sum + (entry?.totalHours || 0), 0)
+      .toFixed(2)
     : "0.00";
   const totalEarnings = Array.isArray(workEntries)
     ? workEntries
-        .reduce((sum, entry) => sum + (entry?.amountEarned || 0), 0)
-        .toFixed(2)
+      .reduce((sum, entry) => sum + (entry?.amountEarned || 0), 0)
+      .toFixed(2)
     : "0.00";
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Top Color Strip */}
         <View style={styles.headerStrip} />
-
-        {/* Report ID Badge */}
-        <View style={styles.reportIdBadge}>
-          <Text>Report ID: {reportId}</Text>
-        </View>
 
         <View style={styles.mainContent}>
           {/* Header Section */}
@@ -388,10 +342,10 @@ const StudentReportPDF = ({ workEntries }) => {
             <View style={styles.table}>
               {/* Table Header */}
               <View style={styles.tableRow}>
-                <View style={[styles.tableColHeader, { width: "15%" }]}>
+                <View style={[styles.tableColHeader, { width: "18%" }]}>
                   <Text>Date</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "25%" }]}>
+                <View style={[styles.tableColHeader, { width: "18%" }]}>
                   <Text>Location</Text>
                 </View>
                 <View style={[styles.tableColHeader, { width: "15%" }]}>
@@ -400,11 +354,14 @@ const StudentReportPDF = ({ workEntries }) => {
                 <View style={[styles.tableColHeader, { width: "15%" }]}>
                   <Text>Out Time</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "15%" }]}>
+                <View style={[styles.tableColHeader, { width: "10%" }]}>
                   <Text>Hours</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "15%" }]}>
-                  <Text>Status</Text>
+                <View style={[styles.tableColHeader, { width: "18%" }]}>
+                  <Text>Faculty</Text>
+                </View>
+                <View style={[styles.tableColHeader, { width: "18%" }]}>
+                  <Text>Signature</Text>
                 </View>
               </View>
 
@@ -420,10 +377,10 @@ const StudentReportPDF = ({ workEntries }) => {
                         : styles.tableRowOdd,
                     ]}
                   >
-                    <View style={[styles.tableCol, { width: "15%" }]}>
+                    <View style={[styles.tableCol, { width: "18%" }]}>
                       <Text>{formatDate(entry?.inTime)}</Text>
                     </View>
-                    <View style={[styles.tableCol, { width: "25%" }]}>
+                    <View style={[styles.tableCol, { width: "18%" }]}>
                       <Text>{entry?.workLocation}</Text>
                     </View>
                     <View style={[styles.tableCol, { width: "15%" }]}>
@@ -432,19 +389,14 @@ const StudentReportPDF = ({ workEntries }) => {
                     <View style={[styles.tableCol, { width: "15%" }]}>
                       <Text>{formatTime(entry?.outTime)}</Text>
                     </View>
-                    <View style={[styles.tableCol, { width: "15%" }]}>
+                    <View style={[styles.tableCol, { width: "10%" }]}>
                       <Text>{entry?.totalHours?.toFixed(2) || "0.00"}</Text>
                     </View>
-                    <View style={[styles.tableCol, { width: "15%" }]}>
-                      <Text
-                        style={[
-                          styles.statusText,
-                          getStatusStyle(entry?.status),
-                        ]}
-                      >
-                        {entry?.status?.charAt(0)?.toUpperCase() +
-                          entry?.status?.slice(1)}
-                      </Text>
+                    <View style={[styles.facultyNameColumn, { width: "18%" }]}>
+                      <Text>{entry?.facultyName}</Text>
+                    </View>
+                    <View style={[styles.signatureColumn, { width: "18%" }]}>
+                      <View style={styles.signaturePlaceholder} />
                     </View>
                   </View>
                 ))}
@@ -494,5 +446,4 @@ const StudentReportPDF = ({ workEntries }) => {
     </Document>
   );
 };
-
 export default StudentReportPDF;
