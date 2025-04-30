@@ -41,7 +41,7 @@ const RegisterPage = () => {
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
         <Typography variant="h4" align="center" gutterBottom>
-          Government Earn & Learn Scheme
+          Earn & Learn Scheme
         </Typography>
         <Typography variant="h5" align="center" gutterBottom>
           Student Registration

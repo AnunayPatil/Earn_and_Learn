@@ -171,18 +171,6 @@ const WorkEntryForm = ({ onSuccess }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Aadhar Number"
-              name="aadharNumber"
-              value={formData.aadharNumber}
-              onChange={handleChange}
-              required
-              margin="normal"
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
               type="datetime-local"
               label="In Time"
               name="inTime"

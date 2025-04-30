@@ -158,6 +158,7 @@ const StudentDashboard = () => {
     { id: "amountEarned", label: "Amount", type: "currency" },
     { id: "facultyName", label: "Faculty" },
     { id: "status", label: "Status", type: "status" },
+    { id: "actions", label: "Actions", type: "actions" },
   ];
 
   return (
@@ -305,6 +306,7 @@ const StudentDashboard = () => {
               showActions={false}
               initialOrderBy="inTime"
               initialOrder="desc"
+              fetchWorkEntries={fetchWorkEntries}
             />
           )}
         </>
