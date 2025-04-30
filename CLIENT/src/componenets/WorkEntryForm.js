@@ -8,10 +8,6 @@ import {
   Grid,
   Paper,
   Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import axios from "axios";
 
@@ -31,11 +27,6 @@ const WorkEntryForm = ({ onSuccess }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [facultyOptions, setFacultyOptions] = useState([
-    "Dr. Sharmila Wagh",
-    "Faculty 2",
-    "Faculty 3",
-  ]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -104,37 +95,19 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth required margin="normal">
-              <InputLabel id="faculty-name-label">Faculty Name</InputLabel>
-              <Select
-                labelId="faculty-name-label"
-                id="facultyName"
-                name="facultyName"
-                value={formData.facultyName}
-                label="Faculty Name"
-                onChange={handleChange}
-                MenuProps={{
-                  PaperProps: {
-                    style: {
-                      maxHeight: 200,
-                    },
-                  },
-                }}
-              >
-                {facultyOptions.map((faculty) => (
-                  <MenuItem key={faculty} value={faculty}>
-                    {faculty}
-                  </MenuItem>
-                ))}
-                {facultyOptions.length === 0 && (
-                  <MenuItem value="" disabled>
-                    Select Faculty
-                  </MenuItem>
-                )}
-              </Select>
-            </FormControl>
+            <TextField
+              fullWidth
+              label="Faculty Name"
+              name="facultyName"
+              value={formData.facultyName}
+              onChange={handleChange}
+              required
+              margin="normal"
+            />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -146,6 +119,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -157,6 +131,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -168,6 +143,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -179,6 +155,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -190,6 +167,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -201,6 +179,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               margin="normal"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -222,6 +201,7 @@ const WorkEntryForm = ({ onSuccess }) => {
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
