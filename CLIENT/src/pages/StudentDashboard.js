@@ -55,10 +55,9 @@ const StudentDashboard = () => {
     rejectedEntries: 0,
   });
 
-  // Set tab based on URL parameter
   useEffect(() => {
     if (tabFromUrl === "profile") setTabValue(1);
-    else setTabValue(0); // Default to entries tab
+    else setTabValue(0);
   }, [tabFromUrl]);
 
   const fetchWorkEntries = async () => {
@@ -72,7 +71,6 @@ const StudentDashboard = () => {
       );
       setWorkEntries(res.data);
 
-      // Calculate statistics
       const totalHours = res.data.reduce(
         (sum, entry) => sum + entry.totalHours,
         0
@@ -109,9 +107,12 @@ const StudentDashboard = () => {
   const fetchProfile = async () => {
     try {
       setProfileLoading(true);
-      const res = await axios.get("https://earn-and-learn-backend.onrender.com/api/profile/me", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const res = await axios.get(
+        "https://earn-and-learn-backend.onrender.com/api/profile/me",
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       setProfileData(res.data);
     } catch (err) {
       console.error("Error fetching profile", err);
@@ -125,8 +126,8 @@ const StudentDashboard = () => {
     fetchProfile();
   }, []);
 
-  const handleNewEntry = (newEntry) => {
-    fetchWorkEntries(); // Refetch all entries to ensure we have the latest data
+  const handleNewEntry = () => {
+    fetchWorkEntries();
     setShowForm(false);
   };
 
@@ -136,7 +137,6 @@ const StudentDashboard = () => {
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
-    // Update URL to reflect current tab
     const tabNames = ["entries", "profile"];
     navigate(`/student-dashboard?tab=${tabNames[newValue]}`);
   };
@@ -148,8 +148,9 @@ const StudentDashboard = () => {
   const canAddWorkEntries =
     profileData && profileData.profileStatus === "approved";
 
+  // ✅ Updated to use "inTime" for the Date column
   const tableColumns = [
-    { id: "createdAt", label: "Date", type: "date" },
+    { id: "inTime", label: "Date", type: "date" },
     { id: "workLocation", label: "Work Location" },
     { id: "inTime", label: "In Time", type: "time" },
     { id: "outTime", label: "Out Time", type: "time" },
@@ -186,7 +187,6 @@ const StudentDashboard = () => {
 
       {tabValue === 0 && (
         <>
-          {/* Statistics Cards */}
           <Grid container spacing={3} sx={{ mb: 4 }}>
             <Grid item xs={12} sm={6} md={3}>
               <StatisticsCard
@@ -260,7 +260,7 @@ const StudentDashboard = () => {
                     user?.email || "student"
                   }-${new Date().toISOString().slice(0, 10)}.pdf`}
                 >
-                  {({ blob, url, loading, error }) => (
+                  {({ loading }) => (
                     <Button
                       variant="contained"
                       startIcon={<Download />}
@@ -303,7 +303,7 @@ const StudentDashboard = () => {
               columns={tableColumns}
               rows={workEntries}
               showActions={false}
-              initialOrderBy="createdAt"
+              initialOrderBy="inTime"
               initialOrder="desc"
             />
           )}
