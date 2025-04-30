@@ -1,0 +1,277 @@
+/* AdminDashboard.module.css */
+.dashboardContainer {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(to bottom, #3a4cb4, #2a3890);
+  color: white;
+  padding: 1.5rem 0;
+  position: fixed;
+  height: 100vh;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.sidebarHeader {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navItem {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.navItem:hover, .activeNavItem {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.navIcon {
+  font-size: 1.25rem;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 260px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3a4cb4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.tabsContainer {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.customTabs {
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.customTab {
+  font-weight: 600;
+  text-transform: none;
+  padding: 1rem 1.5rem;
+  min-width: 120px;
+}
+
+.contentCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.customAccordion {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid #eaeaea;
+}
+
+.accordionHeader {
+  background-color: #f9f9f9;
+}
+
+.studentInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.studentName {
+  font-weight: 600;
+  color: #333;
+}
+
+.studentActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.statusChip {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+}
+
+.statusChipApproved {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+}
+
+.statusChipPending {
+  background-color: rgba(241, 196, 15, 0.15);
+  color: #f1c40f;
+}
+
+.statusChipDefault {
+  background-color: rgba(189, 195, 199, 0.15);
+  color: #7f8c8d;
+}
+
+.tableContainer {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #eaeaea;
+}
+
+.tableHeader {
+  background-color: #f9f9f9;
+}
+
+.tableHeaderCell {
+  font-weight: 600;
+  color: #555;
+  padding: 0.75rem 1rem;
+}
+
+.tableCell {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.actionButton {
+  text-transform: none;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+}
+
+.primaryButton {
+  background-color: #3a4cb4;
+  color: white;
+}
+
+.primaryButton:hover {
+  background-color: #2a3890;
+}
+
+.outlineButton {
+  border: 1px solid #3a4cb4;
+  color: #3a4cb4;
+}
+
+.outlineButton:hover {
+  background-color: rgba(58, 76, 180, 0.05);
+}
+
+.dangerButton {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.dangerButton:hover {
+  background-color: #c0392b;
+}
+
+.statusSelect {
+  font-size: 0.875rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+  min-width: 120px;
+}
+
+.dialog {
+  border-radius: 12px;
+}
+
+.dialogTitle {
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-weight: 600;
+}
+
+.dialogContent {
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.inputField {
+  margin-bottom: 1rem;
+}
+
+.dialogActions {
+  padding: 1rem 1.5rem;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.emptyContent {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+}
