@@ -1,5 +1,3 @@
-// StudentReportPDF.js
-"use client";
 import {
   Document,
   Page,
@@ -209,35 +207,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   signatureSection: {
-    marginTop: 40,
+    marginTop: 80,
     borderTop: "1px solid #90caf9",
     paddingTop: 20,
+    alignItems: "center",
   },
+
   signatureRow: {
     flexDirection: "row",
-    justifyContent: "flex-end", // Align signatures to the right for student report
-    marginBottom: 10,
+    justifyContent: "space-between",
+    width: "90%", // Slight margin from edges
   },
+
   signatureBox: {
     width: "30%",
-    borderTopWidth: 1,
+    alignItems: "center",
+    paddingTop: 10,
+    borderTopWidth: 2,
     borderTopStyle: "solid",
-    borderTopColor: "#007bff",
-    paddingTop: 8,
-    marginTop: 20,
+    borderTopColor: "#1976d2",
   },
-  signatureText: {
-    fontSize: 9,
-    textAlign: "center",
-    color: "#666666",
-  },
+
   signatureTitle: {
-    fontSize: 10,
-    fontWeight: 600,
+    fontSize: 11,
+    fontWeight: "600",
     textAlign: "center",
-    marginTop: 5,
-    color: "#333333",
+    marginTop: 8,
+    color: "#333",
   },
+
+  signatureText: {
+    fontSize: 10,
+    textAlign: "center",
+    color: "#666",
+    marginTop: 5,
+  },
+
   footer: {
     position: "absolute",
     bottom: 0,
@@ -257,7 +262,7 @@ const styles = StyleSheet.create({
     color: "#666666",
   },
   signatureColumn: {
-    width: "10%", // Adjusted width
+    width: "18%", // Adjusted width
     padding: 6,
     fontSize: 9,
     textAlign: "center",
@@ -304,35 +309,49 @@ const StudentReportPDF = ({ workEntries }) => {
   // Calculate total hours and earnings, with safety checks
   const totalHours = Array.isArray(workEntries)
     ? workEntries
-      .reduce((sum, entry) => sum + (entry?.totalHours || 0), 0)
-      .toFixed(2)
+        .reduce((sum, entry) => sum + (entry?.totalHours || 0), 0)
+        .toFixed(2)
     : "0.00";
   const totalEarnings = Array.isArray(workEntries)
     ? workEntries
-      .reduce((sum, entry) => sum + (entry?.amountEarned || 0), 0)
-      .toFixed(2)
+        .reduce((sum, entry) => sum + (entry?.amountEarned || 0), 0)
+        .toFixed(2)
     : "0.00";
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Top Color Strip */}
-        <View style={styles.headerStrip} />
+        <View style={styles.headerStrip}>
+          <Text
+            style={{
+              color: "#ffffff",
+              fontSize: 16,
+              fontWeight: 600,
+              padding: 10,
+            }}
+          >
+            Modern Education Society's Wadia College of Engineering, Pune
+          </Text>
+        </View>
 
         <View style={styles.mainContent}>
           {/* Header Section */}
           <View style={styles.headerContent}>
             <View style={styles.headerLeft}>
-              <Text style={styles.title}>Work Entry Report</Text>
+              <Text style={styles.title}>Earn And Learn Worksheet</Text>
               <Text style={styles.subtitle}>Summary of Your Work</Text>
               <Text style={styles.reportPeriod}>
                 Generated on {formatDate(new Date())}
+              </Text>
+              <Text style={styles.reportPeriod}>
+                {workEntries[0]?.studentName} - {workEntries[0]?.className}
               </Text>
             </View>
             <View style={styles.headerRight}>
               <Text style={styles.detailLabel}>Total Hours Worked</Text>
               <Text style={styles.detailValue}>{totalHours} hours</Text>
               <Text style={styles.detailLabel}>Total Earnings (Estimated)</Text>
-              <Text style={styles.detailValue}>₹{totalEarnings}</Text>
+              <Text style={styles.detailValue}>{totalEarnings}</Text>
             </View>
           </View>
 
@@ -342,25 +361,60 @@ const StudentReportPDF = ({ workEntries }) => {
             <View style={styles.table}>
               {/* Table Header */}
               <View style={styles.tableRow}>
-                <View style={[styles.tableColHeader, { width: "18%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "18%", height: "100%" },
+                  ]}
+                >
                   <Text>Date</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "18%" }]}>
-                  <Text>Location</Text>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "18%", height: "100%" },
+                  ]}
+                >
+                  <Text>Work-Type & Location</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "15%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "15%", height: "100%" },
+                  ]}
+                >
                   <Text>In Time</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "15%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "15%", height: "100%" },
+                  ]}
+                >
                   <Text>Out Time</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "10%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "10%", height: "100%" },
+                  ]}
+                >
                   <Text>Hours</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "18%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "18%", height: "100%" },
+                  ]}
+                >
                   <Text>Faculty</Text>
                 </View>
-                <View style={[styles.tableColHeader, { width: "18%" }]}>
+                <View
+                  style={[
+                    styles.tableColHeader,
+                    { width: "18%", height: "100%" },
+                  ]}
+                >
                   <Text>Signature</Text>
                 </View>
               </View>
@@ -416,12 +470,28 @@ const StudentReportPDF = ({ workEntries }) => {
             </View>
           </View>
 
-          {/* Signature Section (Aligned to the right for student) */}
+          {/* Signature Section (Aligned in a row with space around) */}
           <View style={styles.signatureSection}>
             <View style={styles.signatureRow}>
               <View style={styles.signatureBox}>
                 <Text style={styles.signatureTitle}>Student Signature</Text>
-                {/* You might want to leave space for a physical signature */}
+                <Text style={styles.signatureText}>
+                  _________________________
+                </Text>
+              </View>
+              <View style={styles.signatureBox}>
+                <Text style={styles.signatureTitle}>
+                  Dept. Co-ordinator
+                </Text>
+                <Text style={styles.signatureTitle}>
+                  Signature
+                </Text>
+                <Text style={styles.signatureText}>
+                  _________________________
+                </Text>
+              </View>
+              <View style={styles.signatureBox}>
+                <Text style={styles.signatureTitle}>SWO Signature</Text>
                 <Text style={styles.signatureText}>
                   _________________________
                 </Text>

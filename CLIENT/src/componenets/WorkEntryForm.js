@@ -1,7 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, TextField, Grid, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Grid,
+  Paper,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import axios from "axios";
 
 const WorkEntryForm = ({ onSuccess }) => {
@@ -20,6 +31,11 @@ const WorkEntryForm = ({ onSuccess }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [facultyOptions, setFacultyOptions] = useState([
+    "Dr. Sharmila Wagh",
+    "Faculty 2",
+    "Faculty 3",
+  ]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -80,7 +96,7 @@ const WorkEntryForm = ({ onSuccess }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Work Location"
+              label="Work And Location"
               name="workLocation"
               value={formData.workLocation}
               onChange={handleChange}
@@ -89,15 +105,35 @@ const WorkEntryForm = ({ onSuccess }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Faculty Name"
-              name="facultyName"
-              value={formData.facultyName}
-              onChange={handleChange}
-              required
-              margin="normal"
-            />
+            <FormControl fullWidth required margin="normal">
+              <InputLabel id="faculty-name-label">Faculty Name</InputLabel>
+              <Select
+                labelId="faculty-name-label"
+                id="facultyName"
+                name="facultyName"
+                value={formData.facultyName}
+                label="Faculty Name"
+                onChange={handleChange}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 200,
+                    },
+                  },
+                }}
+              >
+                {facultyOptions.map((faculty) => (
+                  <MenuItem key={faculty} value={faculty}>
+                    {faculty}
+                  </MenuItem>
+                ))}
+                {facultyOptions.length === 0 && (
+                  <MenuItem value="" disabled>
+                    Select Faculty
+                  </MenuItem>
+                )}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -175,8 +211,8 @@ const WorkEntryForm = ({ onSuccess }) => {
               onChange={(event) => {
                 const selectedDate = new Date(event.target.value);
                 const day = selectedDate.getDay();
-                if (day === 0 || day === 6) {
-                  alert("Please select a weekday (Monday to Friday).");
+                if (day === 0) {
+                  alert("Please select a weekday (Monday to Saturday).");
                 } else {
                   handleChange(event);
                 }
@@ -196,8 +232,8 @@ const WorkEntryForm = ({ onSuccess }) => {
               onChange={(event) => {
                 const selectedDate = new Date(event.target.value);
                 const day = selectedDate.getDay();
-                if (day === 0 || day === 6) {
-                  alert("Please select a weekday (Monday to Friday).");
+                if (day === 0) {
+                  alert("Please select a weekday (Monday to Saturday).");
                 } else {
                   handleChange(event);
                 }
